@@ -1,0 +1,855 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard &amp; Statistics - </title>
+    <link href="/scripts/bootstrap.min.css" rel="stylesheet" />
+    <link href="./scripts/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="./scripts/blue.css" rel="stylesheet" />
+    <link href="./scripts/BreadCrumb.css" rel="stylesheet" />
+    <link href="./scripts/jquery.qtip.min.css" rel="stylesheet" />
+    <link href="./scripts/colorbox.css" rel="stylesheet" />
+    <link href="./scripts/sticky.css" rel="stylesheet" />
+    <link href="./scripts/splashy.css" rel="stylesheet" />
+    <link href="./scripts/datepicker.css" rel="stylesheet" />
+    <link href="./scripts/multi-select.css" rel="stylesheet" />
+    <link href="./scripts/flags.css" rel="stylesheet" />
+    <link href="./scripts/style.css" rel="stylesheet" />
+    <link href="./scripts/BlinkingCss.css" rel="stylesheet" />
+
+    <link href="./scripts/kendo.common.min.css" rel="stylesheet" />
+    <link href="./scripts/kendo.silver.min.css" rel="stylesheet" />
+    <link href="./scripts/kendo.default.mobile.min.css" rel="stylesheet" />
+
+    <script src="./scripts/modernizr-2.6.2.js"></script>
+
+
+
+
+    <style>
+        .k-grid .k-grid-header th {
+            font-weight: bold !important;
+        }
+
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+
+
+
+
+    <script>
+        //* hide all elements & show preloader
+        document.documentElement.className += 'js';
+    </script>
+
+    <style>
+        .btn {
+            width: 90px;
+        }
+
+        .NewLogAvailable {
+            background-color: rgba(255, 20, 20, 0.93);
+            border-radius: 20px;
+            padding: 2px 8px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+ 
+    <input id="hf_SiteUrl" value="http://localhost:37649/" type="hidden" />
+    <input type="hidden" id="IsUserAdmin" value="1" />
+    <input type="hidden" id="hf_SelectedLocationID" value="03380e75-ee78-44d2-b525-2f506b809dee" />
+
+    <div id="maincontainer" class="clearfix">
+
+
+        <!-- main content -->
+        <div id="contentwrapper">
+            <div class="main_content">
+
+                <div class="row-fluid">
+                    <div class="span12">
+
+
+                        <style>
+                            html {
+                                font-size: 14px;
+                                font-family: Arial, Helvetica, sans-serif;
+                            }
+                        </style>
+
+                        <style>
+                            .k-chart.inline-chart {
+                                display: inline-block;
+                                width: 400px;
+                                height: 300px;
+                            }
+                        </style>
+
+
+                        <h2 style="width:100%;text-align:center">Dashboard & Statistics</h2>
+
+                        <div id="example">
+
+                            <table style="width:100%">
+
+                                <tr>
+                                    <td>
+                                        <div class="demo-section k-content wide">
+                                            <div id="chart_ActiveOrdersPerDept"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="demo-section k-content wide">
+                                            <div id="chart_LateOrdersPerDept"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="demo-section k-content wide">
+                                            <div id="chart_OrdersPerDept"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="demo-section k-content wide">
+                                            <div id="chart_HoursPerDept"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="demo-section k-content wide">
+                                            <div id="chart_TopUsedStockItems" class="inline-chart"></div>
+                                            <div id="chart_NewVsOldClients" class="inline-chart"></div>
+                                            <div id="chart_UsedVsScrap" class="inline-chart"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <script src="./scripts/jquery.min.js"></script>
+        <script src="./Scripts/jquery.debouncedresize.min.js"></script>
+        <script src="./Scripts/jquery.actual.min.js"></script>
+        <script src="./Scripts/jquery_cookie.min.js"></script>
+        <script src="./Scripts//bootstrap.min.js"></script>
+        <script src="./scripts/jquery.qtip.min.js"></script>
+        <script src="./scripts/jquery.jBreadCrumb.1.1.min.js"></script>
+        <script src="./Scripts/ios-orientationchange-fix.js"></script>
+        <script src="./scripts/antiscroll.js"></script>
+        <script src="./scripts/mousewheel.js"></script>
+        <script src="./scripts/jquery.colorbox.min.js"></script>
+        <script src="./Scripts/selectNav.js"></script>
+        <script src="./Scripts/gebo_common.js"></script>
+        <script src="./scripts/validate.min.js"></script>
+        <script src="./scripts/bootstrap-timepicker.min.js"></script>
+        <script src="./scripts/jquery.multi-select.js"></script>
+        <script src="./scripts/jquery.quicksearch.js"></script>
+
+        <script src="./scripts/kendo.all.min.js"></script>
+        <script src="./scripts/kendo.culture.en-US.min.js"></script>
+
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                try {
+                    $("html").removeClass("js");
+                } catch (e) {
+
+                }
+
+                HighlightMenutItem();
+
+                if ($("#IsUserAdmin").val() == "1") {
+
+                    NewsLogGridNotification();
+
+                    PopulateFactoryLocations();
+
+                    CheckIfNewLogNotificationExist();
+
+                    window.setInterval(function () {
+                        CheckIfNewLogNotificationExist();
+                    }, 60000);
+                }
+
+                SecurityAlertMsg();
+            });
+
+            function HighlightMenutItem() {
+                try {
+
+                    $("#collapse_2f287518c913469eb9206a5ac24911f0").addClass("in");
+                    gebo_sidebar.make_active();
+                    $("#li_0c8a31027f36415184663d945f60444e").addClass("active");
+
+                } catch (e) {
+
+                }
+            }
+
+            function GetSMSStatus() {
+               
+            }
+
+            function PopulateFactoryLocations() {
+                var selectedLocationID = $("#hf_SelectedLocationID").val();
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/GetFactoryLocations",
+                    dataType: "json",
+                    success: function (data) {
+
+                        $("#tb_SelectedLocation").text('');
+                        $("#tb_SelectedLocation").append("Location <b class='caret'></b>");
+
+                        try {
+                            if (data != null) {
+
+                                for (var i = 0; i < data.length; i++) {
+                                    var record = data[i];
+
+                                    if (selectedLocationID == record.ID) {
+                                        $("#tb_SelectedLocation").text('');
+                                        $("#tb_SelectedLocation").append(record.LocationName + "<b class='caret'></b>");
+                                    }
+
+                                    $("#ddl_FactoryLocations").append('<li><a href="javascript:void(0)" onclick="SetFactoryLocation(\'' + record.ID + '\',\'' + record.LocationName + '\')">' + record.LocationName + '</a></li>');
+                                }
+                            }
+
+
+                        } catch (e) {
+
+                        }
+                    }
+                });
+            }
+
+            function SetFactoryLocation(locationId, locationName) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/SetFactoryLocation?locationID=" + locationId,
+                    dataType: "json",
+                    success: function (data) {
+                        $("#tb_SelectedLocation").text('');
+                        $("#tb_SelectedLocation").append(locationName + "<b class='caret'></b>");
+
+                    }
+                });
+            }
+
+            function SecurityAlertMsg() {
+
+                try {
+
+                    console.log("%cStop!", "font: 2em sans-serif; color: yellow; background-color: red;");
+                    console.log("%cThis is a browser feature intended for developers", "font: 2em sans-serif; color: yellow; background-color: red;");
+                    console.log("%cCSP Solutions security team will be alerted with all activity", "font: 2em sans-serif; color: yellow; background-color: red;");
+
+                } catch (e) {
+
+                }
+
+            }
+
+            function SetUserAsSeenNotification() {
+
+                $("#NewsLogGridNotification").data("kendoGrid").dataSource.read();
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Orders/SetAsSeenNewsLog",
+                    dataType: "json",
+                    success: function (data) {
+                        $("#NewLogAvailableDiv").hide();
+                    }
+                });
+            }
+
+            function CheckIfNewLogNotificationExist() {
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Orders/HasUnSeenNewsLog",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+
+                            $("#NewLogAvailableDiv").show();
+                        }
+                        else {
+                            $("#NewLogAvailableDiv").hide();
+                        }
+                    }
+                });
+            }
+
+            function NewsLogGridNotification() {
+                $("#NewsLogGridNotification").kendoGrid({
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "/Orders/GetActivityNewsLogNotification",
+                                dataType: "json"
+                            },
+                        },
+                        schema: {
+                            model: {
+                                id: "ID",
+                                fields: {
+                                    ID: { editable: false, defaultValue: "00000000-0000-0000-0000-000000000000" },
+                                    Msg: { type: "string" },
+                                    DateCreated: { type: "date" },
+                                    DatePart: { type: "date" },
+                                }
+                            }
+                        },
+                        sort: { field: "DateCreated", dir: "desc" },
+                    },
+                    height: 180,
+                    sortable: false,
+                    filterable: false,
+                    columns: [
+                         {
+                             field: "DateCreated", title: "Date", width: "140px",
+                             format: "{0: dd/MM/yyyy hh:mm tt}",
+                         },
+                         {
+                             field: "Msg",
+                             title: "Message",
+                         },
+                    ],
+                    editable: false,
+                });
+            }
+
+        </script>
+
+
+        <script>
+            var drawing = kendo.drawing;
+            var geometry = kendo.geometry;
+
+            $(document).ready(function () {
+
+                createChartActiveOrdersPerDept();
+                createOrdersPerDeptChart();
+                createChartLateOrdersPerDept();
+                createHoursPerDeptChart();
+                createTopUsedStockItemsChart();
+                createNewVsOldClientsChart();
+                createChartUsedVsScrap();
+            });
+
+            function createChartUsedVsScrap() {
+                $("#chart_UsedVsScrap").kendoChart({
+                    theme: "Material",
+                    title: {
+                        position: "bottom",
+                        text: "Used Stock Items Vs New Scrap Items"
+                    },
+                    legend: {
+                        visible: false
+                    },
+                    chartArea: {
+                        background: ""
+                    },
+                    seriesDefaults: {
+                        labels: {
+                            visible: true,
+                            background: "transparent",
+                            template: "#= category #: \n #= value#"
+                        }
+                    },
+                    series: [{
+                        type: "pie",
+                        startAngle: 150,
+                        data: [{
+                            category: "Used Stock Items",
+                            value: 2000
+                        }, {
+                            category: "New Scrap Items",
+                            value: 400
+                        }]
+                    }],
+                    tooltip: {
+                        visible: true,
+                        format: "{0}"
+                    }
+                });
+            }
+
+            function createTopUsedStockItemsChart() {
+                $("#chart_TopUsedStockItems").kendoChart({
+                    theme: "Material",
+                    title: {
+                        position: "bottom",
+                        text: "Top 5 Most Used Stock Items"
+                    },
+                    legend: {
+                        visible: false
+                    },
+                    chartArea: {
+                        background: ""
+                    },
+                    seriesDefaults: {
+                        labels: {
+                            visible: true,
+                            background: "transparent",
+                            template: "#= category #: \n #= value#%"
+                        }
+                    },
+                    series: [{
+                        type: "pie",
+                        startAngle: 150,
+                        data: [{
+                            category: "Z0805",
+                            value: 53.8
+                        }, {
+                            category: "S0403",
+                            value: 16.1
+                        }, {
+                            category: "T0301",
+                            value: 11.3
+                        }, {
+                            category: "Z0800",
+                            value: 9.6
+                        }, {
+                            category: "SC0205",
+                            value: 5.2
+                        }]
+                    }],
+                    tooltip: {
+                        visible: true,
+                        format: "{0}%"
+                    }
+                });
+            }
+
+            function createNewVsOldClientsChart() {
+                $("#chart_NewVsOldClients").kendoChart({
+                    theme: "Material",
+                    title: {
+                        position: "bottom",
+                        text: "New Clients"
+                    },
+                    legend: {
+                        visible: false
+                    },
+                    chartArea: {
+                        background: ""
+                    },
+                    seriesDefaults: {
+                        labels: {
+                            visible: true,
+                            background: "transparent",
+                            template: "#= category #: \n #= value#"
+                        }
+                    },
+                    series: [{
+                        type: "pie",
+                        startAngle: 150,
+                        data: [{
+                            category: "New Clients",
+                            value: 50
+                        }, {
+                            category: "Current Clients",
+                            value: 500
+                        }]
+                    }],
+                    tooltip: {
+                        visible: true,
+                        format: "{0}"
+                    }
+                });
+            }
+
+            function createChartActiveOrdersPerDept() {
+                $("#chart_ActiveOrdersPerDept").kendoChart({
+                    theme: "Material",
+                    title: {
+                        text: "Active Orders Per Department"
+                    },
+                    legend: {
+                        position: "bottom",
+                        item: {
+                            visual: createLegendItem
+                        }
+                    },
+                    seriesDefaults: {
+                        type: "column",
+                        stack: true,
+                        highlight: {
+                            toggle: function (e) {
+                                // Don't create a highlight overlay,
+                                // we'll modify the existing visual instead
+                                e.preventDefault();
+
+                                var visual = e.visual;
+                                var opacity = e.show ? 0.8 : 1;
+
+                                visual.opacity(opacity);
+                            }
+                        },
+                        visual: function (e) {
+                            return createColumn(e.rect, e.options.color);
+                        }
+                    },
+                    series: [{
+                        name: "Total Orders",
+                        data: [100, 120, 65, 95, 111]
+                    }
+                    ],
+                    panes: [{
+                        clip: false
+                    }],
+                    valueAxis: {
+                        line: {
+                            visible: false
+                        }
+                    },
+                    categoryAxis: {
+                        categories: ["Laser", "Cutting", "Rolling", "Bending", "Welding"],
+                        majorGridLines: {
+                            visible: false
+                        },
+                        line: {
+                            visible: false
+                        }
+                    },
+                    tooltip: {
+                        visible: true
+                    }
+                });
+            }
+
+            function createChartLateOrdersPerDept() {
+                $("#chart_LateOrdersPerDept").kendoChart({
+                    theme: "Material",
+                    title: {
+                        text: "Late Orders Per Department"
+                    },
+                    legend: {
+                        position: "bottom",
+                        item: {
+                            visual: createLegendItem
+                        }
+                    },
+                    seriesDefaults: {
+                        type: "column",
+                        stack: true,
+                        highlight: {
+                            toggle: function (e) {
+                                // Don't create a highlight overlay,
+                                // we'll modify the existing visual instead
+                                e.preventDefault();
+
+                                var visual = e.visual;
+                                var opacity = e.show ? 0.8 : 1;
+
+                                visual.opacity(opacity);
+                            }
+                        },
+                        visual: function (e) {
+                            return createColumn(e.rect, e.options.color);
+                        }
+                    },
+                    series: [{
+                        name: "Total Orders",
+                        data: [10, 12, 5, 5, 1]
+                    }
+                    ],
+                    panes: [{
+                        clip: false
+                    }],
+                    valueAxis: {
+                        line: {
+                            visible: false
+                        }
+                    },
+                    categoryAxis: {
+                        categories: ["Laser", "Cutting", "Rolling", "Bending", "Welding"],
+                        majorGridLines: {
+                            visible: false
+                        },
+                        line: {
+                            visible: false
+                        }
+                    },
+                    tooltip: {
+                        visible: true
+                    }
+                });
+            }
+
+            function createHoursPerDeptChart() {
+                $("#chart_HoursPerDept").kendoChart({
+                    theme: "Material",
+                    title: {
+                        text: "Total Worked Hours Per Department"
+                    },
+                    legend: {
+                        position: "bottom",
+                        item: {
+                            visual: createLegendItem
+                        }
+                    },
+                    seriesDefaults: {
+                        type: "column",
+                        stack: true,
+                        highlight: {
+                            toggle: function (e) {
+                                // Don't create a highlight overlay,
+                                // we'll modify the existing visual instead
+                                e.preventDefault();
+
+                                var visual = e.visual;
+                                var opacity = e.show ? 0.8 : 1;
+
+                                visual.opacity(opacity);
+                            }
+                        },
+                        visual: function (e) {
+                            return createColumn(e.rect, e.options.color);
+                        }
+                    },
+                    series: [{
+                        name: "Total Hours",
+                        data: [1000, 1200, 1400, 1600, 2000]
+                    }
+                    ],
+                    panes: [{
+                        clip: false
+                    }],
+                    valueAxis: {
+                        line: {
+                            visible: false
+                        }
+                    },
+                    categoryAxis: {
+                        categories: ["Laser", "Cutting", "Rolling", "Bending", "Welding"],
+                        majorGridLines: {
+                            visible: false
+                        },
+                        line: {
+                            visible: false
+                        }
+                    },
+                    tooltip: {
+                        visible: true
+                    }
+                });
+            }
+
+            function createOrdersPerDeptChart() {
+                $("#chart_OrdersPerDept").kendoChart({
+                    theme: "Material",
+                    title: {
+                        text: "Orders Per Department"
+                    },
+                    legend: {
+                        position: "bottom",
+                        item: {
+                            visual: createLegendItem
+                        }
+                    },
+                    seriesDefaults: {
+                        type: "column",
+                        stack: true,
+                        highlight: {
+                            toggle: function (e) {
+                                // Don't create a highlight overlay,
+                                // we'll modify the existing visual instead
+                                e.preventDefault();
+
+                                var visual = e.visual;
+                                var opacity = e.show ? 0.8 : 1;
+
+                                visual.opacity(opacity);
+                            }
+                        },
+                        visual: function (e) {
+                            return createColumn(e.rect, e.options.color);
+                        }
+                    },
+                    series: [{
+                        name: "New Jobs",
+                        data: [1000, 1200, 1400, 1600, 2000]
+                    }, {
+                        name: "Approved Jobs",
+                        data: [450, 750, 950, 1100, 1400]
+                    }, {
+                        name: "Finished Jobs",
+                        data: [650, 550, 450, 500, 600]
+                    }, {
+                        name: "Delivered Jobs",
+                        data: [600, 500, 400, 450, 500]
+                    }
+                    , {
+                        name: "Cancelled Jobs",
+                        data: [1, 3, 0, 0, 0]
+                    }
+                    ],
+                    panes: [{
+                        clip: false
+                    }],
+                    valueAxis: {
+                        line: {
+                            visible: false
+                        }
+                    },
+                    categoryAxis: {
+                        categories: ["Laser", "Cutting", "Rolling", "Bending", "Welding"],
+                        majorGridLines: {
+                            visible: false
+                        },
+                        line: {
+                            visible: false
+                        }
+                    },
+                    tooltip: {
+                        visible: true
+                    }
+                });
+            }
+
+            function createColumn(rect, color) {
+                var origin = rect.origin;
+                var center = rect.center();
+                var bottomRight = rect.bottomRight();
+                var radiusX = rect.width() / 2;
+                var radiusY = radiusX / 3;
+                var gradient = new drawing.LinearGradient({
+                    stops: [{
+                        offset: 0,
+                        color: color
+                    }, {
+                        offset: 0.5,
+                        color: color,
+                        opacity: 0.9
+                    }, {
+                        offset: 0.5,
+                        color: color,
+                        opacity: 0.9
+                    }, {
+                        offset: 1,
+                        color: color
+                    }]
+                });
+
+                var path = new drawing.Path({
+                    fill: gradient,
+                    stroke: {
+                        color: "none"
+                    }
+                }).moveTo(origin.x, origin.y)
+                    .lineTo(origin.x, bottomRight.y)
+                    .arc(180, 0, radiusX, radiusY, true)
+                    .lineTo(bottomRight.x, origin.y)
+                    .arc(0, 180, radiusX, radiusY);
+
+                var topArcGeometry = new geometry.Arc([center.x, origin.y], {
+                    startAngle: 0,
+                    endAngle: 360,
+                    radiusX: radiusX,
+                    radiusY: radiusY
+                });
+
+                var topArc = new drawing.Arc(topArcGeometry, {
+                    fill: {
+                        color: color
+                    },
+                    stroke: {
+                        color: "#ebebeb"
+                    }
+                });
+                var group = new drawing.Group();
+                group.append(path, topArc);
+                return group;
+            }
+
+            function createLegendItem(e) {
+                var color = e.options.markers.background;
+                var labelColor = e.options.labels.color;
+                var rect = new geometry.Rect([0, 0], [120, 50]);
+                var layout = new drawing.Layout(rect, {
+                    spacing: 5,
+                    alignItems: "center"
+                });
+
+                var overlay = drawing.Path.fromRect(rect, {
+                    fill: {
+                        color: "#fff",
+                        opacity: 0
+                    },
+                    stroke: {
+                        color: "none"
+                    },
+                    cursor: "pointer"
+                });
+
+                var column = createColumn(new geometry.Rect([0, 0], [15, 10]), color);
+                var label = new drawing.Text(e.series.name, [0, 0], {
+                    fill: {
+                        color: labelColor
+                    }
+                })
+
+                layout.append(column, label);
+                layout.reflow();
+
+                var group = new drawing.Group().append(layout, overlay);
+
+                return group;
+            }
+
+        </script>
+
+    </div>
+    <footer>
+        <div style="margin-top: -30px;">
+            <center>
+                <p>&copy; 2016 - Developed by <a href="http://www.cspsolutions.com">CSP Solutions</a></p>
+            </center>
+        </div>
+    </footer>
+
+ 
+
+</body>
+
+
+</html>
